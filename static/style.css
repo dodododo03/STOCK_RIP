@@ -1,0 +1,702 @@
+/* ===== 기본 리셋 & 변수 ===== */
+:root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark-gray: #1c1c1c;
+    --mid-gray: #2a2a2a;
+    --light-gray: #9ca3af;
+    --white: #e5e7eb;
+    --gold: #ffd700;
+    --crimson: #dc2626;
+    --dim-red: #f87171;
+    --font-serif: 'Noto Serif KR', serif;
+    --font-gothic: 'UnifrakturMaguntia', cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: var(--font-serif);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* ===== 헤더 ===== */
+.funeral-header {
+    background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+    border-bottom: 2px solid #333;
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+.title {
+    font-family: var(--font-gothic);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 0.1em;
+    color: var(--white);
+    text-shadow: 0 0 30px rgba(255,255,255,0.15);
+    margin: 0.5rem 0;
+}
+
+.subtitle {
+    color: var(--light-gray);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+}
+
+/* ===== 비명 지수 배너 ===== */
+.scream-index {
+    background: var(--dark-gray);
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 1.2rem;
+}
+
+.scream-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.scream-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: var(--light-gray);
+    text-transform: uppercase;
+}
+
+.scream-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.scream-avg, .scream-count {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+}
+
+.scream-avg strong, .scream-count strong {
+    color: var(--dim-red);
+}
+
+/* ===== 에러 배너 ===== */
+.error-banner {
+    background: #1f0000;
+    border: 1px solid var(--crimson);
+    color: var(--dim-red);
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+}
+
+/* ===== 메인 레이아웃 ===== */
+.main-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-left: 3px solid var(--white);
+    padding-left: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-desc {
+    color: var(--light-gray);
+    font-size: 0.875rem;
+    margin-bottom: 1.8rem;
+}
+
+/* ===== 사망 신고 폼 ===== */
+.report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: var(--dark-gray);
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 2rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--light-gray);
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+    background: var(--mid-gray);
+    border: 1px solid #3a3a3a;
+    border-radius: 3px;
+    color: var(--white);
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #666;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* 수익률 미리보기 */
+.profit-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #161616;
+    border: 1px dashed #333;
+    border-radius: 3px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    color: var(--light-gray);
+}
+
+.submit-btn {
+    background: var(--dark-gray);
+    border: 1px solid #444;
+    border-radius: 3px;
+    color: var(--white);
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    padding: 0.85rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.submit-btn:hover {
+    background: #2a2a2a;
+    border-color: #888;
+}
+
+/* ===== 영정 카드 그리드 ===== */
+.funeral-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.funeral-card {
+    background: var(--dark-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.funeral-card:hover {
+    transform: translateY(-3px);
+}
+
+/* 수익률별 카드 테두리 — 핵심 CSS 클래스 */
+.card-normal   { border: 1px solid #333; }
+.card-severe   { border: 1px solid var(--crimson); box-shadow: 0 0 12px rgba(220,38,38,0.3); }
+.card-legendary {
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* 영정 사진 */
+.portrait-wrapper {
+    position: relative;
+    background: #161616;
+    padding: 1.5rem 1rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #222;
+}
+
+.portrait {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.portrait-icon { font-size: 2.5rem; }
+
+.stock-ticker {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--light-gray);
+    text-transform: uppercase;
+}
+
+/* 뱃지 */
+.badge {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+}
+
+.badge-legendary { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid var(--gold); }
+.badge-severe    { background: rgba(220,38,38,0.15); color: var(--dim-red); border: 1px solid var(--crimson); }
+
+/* 카드 바디 */
+.card-body { padding: 1rem; }
+
+.card-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.card-rate {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.rate-legendary { color: var(--gold); }
+.rate-severe    { color: var(--dim-red); }
+.rate-normal    { color: var(--white); }
+
+.card-words {
+    font-size: 0.8rem;
+    color: var(--light-gray);
+    font-style: italic;
+    border-left: 2px solid #444;
+    padding-left: 0.6rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #555;
+}
+
+/* ===== 빈 안치실 ===== */
+.empty-hall {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--light-gray);
+    border: 1px dashed #2a2a2a;
+    border-radius: 4px;
+}
+
+.empty-hall p + p { margin-top: 0.5rem; font-size: 0.85rem; color: #444; }
+
+/* ===== 푸터 ===== */
+.funeral-footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #1a1a1a;
+    color: #333;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .scream-inner { gap: 1rem; }
+    .funeral-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+/* ═══════════════════════════════════════════════
+   TOP 3 대시보드
+═══════════════════════════════════════════════ */
+.dashboard {
+    background: #0e0e0e;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 2rem 1.5rem;
+}
+
+.dashboard-inner {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.dashboard-title {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.top3-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.top3-card {
+    background: var(--dark-gray);
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 1.2rem 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: border-color 0.2s;
+}
+
+.top3-card.rank-1 { border-color: rgba(255, 215, 0, 0.4); }
+.top3-card.rank-2 { border-color: rgba(192, 192, 192, 0.3); }
+.top3-card.rank-3 { border-color: rgba(205, 127, 50, 0.3); }
+
+.top3-rank  { font-size: 1.6rem; }
+.top3-name  { font-size: 1.1rem; font-weight: 700; }
+.top3-share { font-size: 0.85rem; color: var(--dim-red); }
+.top3-count { font-size: 0.75rem; color: var(--light-gray); margin-bottom: 0.6rem; }
+
+.top3-bar-wrap {
+    background: #1a1a1a;
+    border-radius: 2px;
+    height: 4px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.top3-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #555, #888);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+.top3-card.rank-1 .top3-bar { background: linear-gradient(90deg, #b8860b, var(--gold)); }
+.top3-card.rank-2 .top3-bar { background: linear-gradient(90deg, #777, #c0c0c0); }
+.top3-card.rank-3 .top3-bar { background: linear-gradient(90deg, #7c4f1e, #cd7f32); }
+
+
+/* ═══════════════════════════════════════════════
+   헌화 버튼
+═══════════════════════════════════════════════ */
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.8rem;
+    gap: 0.5rem;
+}
+
+.mourn-btn {
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    border-radius: 3px;
+    color: var(--light-gray);
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-size: 0.78rem;
+    padding: 0.35rem 0.7rem;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.mourn-btn:hover:not(:disabled) {
+    border-color: #888;
+    color: var(--white);
+}
+
+.mourn-btn:disabled,
+.mourn-btn.mourn-done {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.mourner-count {
+    font-size: 0.78rem;
+    color: var(--light-gray);
+    white-space: nowrap;
+}
+
+.card-date {
+    font-size: 0.72rem;
+    color: #444;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+
+/* ═══════════════════════════════════════════════
+   황금 테두리 반짝임 애니메이션 (-50% 이하)
+═══════════════════════════════════════════════ */
+@keyframes goldPulse {
+    0%,  100% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.35); }
+    50%        { box-shadow: 0 0 28px rgba(255, 215, 0, 0.75); }
+}
+
+.card-legendary {
+    border: 2px solid var(--gold) !important;
+    animation: goldPulse 2.8s ease-in-out infinite;
+}
+
+
+/* ═══════════════════════════════════════════════
+   헤더 장식선
+═══════════════════════════════════════════════ */
+.header-deco {
+    color: #333;
+    letter-spacing: 0.5em;
+    font-size: 0.8rem;
+    margin: 0.3rem 0;
+}
+/* ═══════════════════════════════════════════════
+   삭제 버튼 — 카드 우상단 고정
+═══════════════════════════════════════════════ */
+
+/* 카드에 relative가 있어야 버튼의 absolute 기준점이 됨 */
+.funeral-card { position: relative; }
+
+.delete-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    color: #444;
+    cursor: pointer;
+
+    font-size: 0.7rem;
+    line-height: 1;
+    padding: 0.3rem 0.45rem;
+
+    /* 평소엔 존재감 없이, hover 시에만 드러나는 효과 */
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* 카드에 마우스 올리면 삭제 버튼 등장 */
+.funeral-card:hover .delete-btn {
+    opacity: 1;
+}
+
+/* 버튼 자체에 hover 시 붉은 경고색 */
+.delete-btn:hover {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.08);
+}
+/* ═══════════════════════════════════════════════
+   분향소 (room.html) 레이아웃
+═══════════════════════════════════════════════ */
+.room-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 0.8rem;
+    color: var(--light-gray);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.back-link:hover { color: var(--white); }
+
+
+/* ── 영정 패널 ── */
+.obituary-panel {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+    background: var(--dark-gray);
+    border-radius: 4px;
+    padding: 2.5rem;
+}
+
+.obit-normal    { border: 1px solid #333; }
+.obit-severe    { border: 1px solid var(--crimson);
+                  box-shadow: 0 0 20px rgba(220,38,38,0.2); }
+.obit-legendary { border: 2px solid var(--gold);
+                  animation: goldPulse 2.8s ease-in-out infinite; }
+
+.obit-portrait {
+    flex-shrink: 0;
+    width: 110px;
+    height: 130px;
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.obit-icon { font-size: 3.5rem; }
+
+.obit-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.obit-name {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.obit-rate {
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.obit-last-words {
+    margin-top: 1.2rem;
+    padding: 0.8rem 1rem;
+    border-left: 2px solid #333;
+    background: #161616;
+    border-radius: 0 3px 3px 0;
+}
+
+.obit-quote {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--light-gray);
+    line-height: 1.6;
+}
+
+.obit-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: #555;
+    flex-wrap: wrap;
+}
+
+
+/* ── 방명록 폼 ── */
+.comment-form { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.comment-form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+/* ── 방명록 목록 ── */
+.comment-list-title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.comment-count {
+    font-size: 0.8rem;
+    color: var(--light-gray);
+    font-weight: 400;
+}
+
+.comment-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.comment-item {
+    background: var(--dark-gray);
+    border: 1px solid #222;
+    border-radius: 3px;
+    padding: 1rem 1.2rem;
+    transition: border-color 0.2s;
+}
+.comment-item:hover { border-color: #333; }
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.comment-author {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.comment-date {
+    font-size: 0.72rem;
+    color: #444;
+}
+
+.comment-content {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    line-height: 1.65;
+}
+
+
+/* ── 카드 → 분향소 링크 ── */
+.card-name-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.card-name-link:hover .card-name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* ── 반응형 보완 ── */
+@media (max-width: 560px) {
+    .obituary-panel { flex-direction: column; align-items: center; text-align: center; }
+    .obit-meta      { justify-content: center; }
+    .obit-last-words { text-align: left; }
+}

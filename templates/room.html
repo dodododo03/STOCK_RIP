@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ funeral.stock_name }} 분향소 — STOCK_RIP</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ════════════ 헤더 ════════════ -->
+<header class="funeral-header" style="padding: 2rem 1rem 1.5rem;">
+    <div class="header-deco">✦ ✦ ✦</div>
+    <h1 class="title" style="font-size: clamp(1.8rem, 4vw, 3rem);">⚰️ 분향소 ⚰️</h1>
+    <a href="/" class="back-link">← 안치실 목록으로 돌아가기</a>
+    <div class="header-deco" style="margin-top:0.5rem;">✦ ✦ ✦</div>
+</header>
+
+<main class="room-container">
+
+    <!-- ── 영정 패널 ── -->
+    <section class="obituary-panel
+        {% if funeral.profit_rate <= -50 %}obit-legendary
+        {% elif funeral.profit_rate <= -30 %}obit-severe
+        {% else %}obit-normal{% endif %}">
+
+        <div class="obit-portrait">
+            <span class="obit-icon">📉</span>
+        </div>
+
+        <div class="obit-info">
+            <p class="obit-label">고인의 종목명</p>
+            <h2 class="obit-name">{{ funeral.stock_name }}</h2>
+
+            <p class="obit-label" style="margin-top:1.2rem;">향년 수익률</p>
+            <p class="obit-rate
+                {% if funeral.profit_rate <= -50 %}rate-legendary
+                {% elif funeral.profit_rate <= -30 %}rate-severe
+                {% else %}rate-normal{% endif %}">
+                {{ funeral.profit_rate }}%
+            </p>
+
+            {% if funeral.last_words %}
+            <div class="obit-last-words">
+                <p class="obit-label">마지막 한마디</p>
+                <blockquote class="obit-quote">"{{ funeral.last_words }}"</blockquote>
+            </div>
+            {% endif %}
+
+            <div class="obit-meta">
+                <span>🕯️ 조문객 {{ funeral.mourner_count }}명</span>
+                <span>📅 {{ funeral.created_at.strftime('%Y년 %m월 %d일') }} 영면</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 방명록 작성 ── -->
+    <section class="guestbook-section">
+        <h2 class="section-title">📝 방명록</h2>
+        <p class="section-desc">고인을 기억하는 한 마디를 남겨주십시오.</p>
+
+        <form action="/comment/{{ funeral.id }}" method="post" class="comment-form">
+            <div class="comment-form-row">
+                <div class="form-group" style="flex: 0 0 180px;">
+                    <label for="author">조문객 성함</label>
+                    <input type="text" id="author" name="author"
+                           placeholder="익명의 조문객" maxlength="30">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="content">추모의 말</label>
+                    <input type="text" id="content" name="content"
+                           placeholder="예: 같이 물탔던 사람으로서... 진심으로 애도합니다."
+                           required maxlength="200">
+                </div>
+            </div>
+            <button type="submit" class="submit-btn" style="margin-top:0;">
+                🌸 방명록 남기기
+            </button>
+        </form>
+    </section>
+
+    <!-- ── 방명록 목록 ── -->
+    <section class="comment-list-section">
+        <h3 class="comment-list-title">
+            🕯️ 추모의 글
+            <span class="comment-count">{{ comments | length }}개</span>
+        </h3>
+
+        {% if comments %}
+        <ul class="comment-list">
+            {% for c in comments %}
+            <li class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-author">{{ c.author }}</span>
+                    <span class="comment-date">
+                        {{ c.created_at.strftime('%Y.%m.%d %H:%M') }}
+                    </span>
+                </div>
+                <p class="comment-content">{{ c.content }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <div class="empty-hall" style="padding: 2.5rem 1rem;">
+            <p>🕊️ 아직 추모의 글이 없습니다.</p>
+            <p>첫 번째 방명록을 남겨주세요.</p>
+        </div>
+        {% endif %}
+    </section>
+
+</main>
+
+<footer class="funeral-footer">
+    <p>— STOCK_RIP —</p>
+    <p>모든 손실은 영원히 기록됩니다.</p>
+</footer>
+
+</body>
+</html>
