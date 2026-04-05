@@ -12,6 +12,9 @@ from sqlalchemy import func
 
 import models, schemas
 from database import engine, get_db
+import models
+
+
 
 # DB 테이블 생성
 models.Base.metadata.create_all(bind=engine)
@@ -50,7 +53,7 @@ def calc_profit(avg_price: float, current_price: float) -> float:
     return round((current_price - avg_price) / avg_price * 100, 2)
 
 # ── 라우터 ──────────────────────────────────────────────────
-@app.get("/")
+@app.get("/", methods=["GET", "HEAD"])
 def main_page(request: Request, db: Session = Depends(get_db)):
     funerals = db.query(models.Funeral).order_by(models.Funeral.created_at.desc()).all()
     avg_r = db.query(func.avg(models.Funeral.profit_rate)).scalar() or 0.0
