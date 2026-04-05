@@ -1,4 +1,10 @@
 import os
+
+# 기존 코드: SQLALCHEMY_DATABASE_URL = "sqlite:///./stocks.db"
+# 수정 코드:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "stocks.db")
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{db_path}"
 from collections import Counter
 
 from fastapi import FastAPI, Depends, Request, Form, HTTPException, status
@@ -193,11 +199,11 @@ def api_list(skip: int = 0, limit: int = 20, db: Session = Depends(get_db)):
     )
 
 
-# ── 진입점: 배포 환경 PORT 환경변수 대응 ─────────────────────────
+# ── 기존 맨 밑부분 다 지우고 이걸로 교체 ──
 if __name__ == "__main__":
     import uvicorn
     import os
-    # Render는 PORT 환경변수를 주입하므로, 없으면 기본값 10000을 사용합니다.
-    port = int(os.environ.get("PORT", 10000)) 
-    # 배포 환경에서는 "main:app" 문자열 대신 객체 app을 직접 넘기는 게 더 안전합니다.
+    # Render 포트 대응
+    port = int(os.environ.get("PORT", 10000))
+    # reload=False로 설정 (배포 환경 국룰)
     uvicorn.run(app, host="0.0.0.0", port=port)
