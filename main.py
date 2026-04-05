@@ -199,11 +199,11 @@ def api_list(skip: int = 0, limit: int = 20, db: Session = Depends(get_db)):
     )
 
 
-# ── 기존 맨 밑부분 다 지우고 이걸로 교체 ──
+# ── 진입점 ──
 if __name__ == "__main__":
     import uvicorn
     import os
-    # Render 포트 대응
+    # Render 환경변수 PORT를 가져오고, 없으면 10000 사용
     port = int(os.environ.get("PORT", 10000))
-    # reload=False로 설정 (배포 환경 국룰)
+    # uvicorn 실행 (app 객체를 직접 전달)
     uvicorn.run(app, host="0.0.0.0", port=port)
