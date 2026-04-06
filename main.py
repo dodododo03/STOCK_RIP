@@ -12,7 +12,6 @@ from sqlalchemy import func
 
 import models, schemas
 from database import engine, get_db
-import models
 
 
 
