@@ -52,7 +52,7 @@ def calc_profit(avg_price: float, current_price: float) -> float:
     return round((current_price - avg_price) / avg_price * 100, 2)
 
 # ── 라우터 ──────────────────────────────────────────────────
-@app.get("/", methods=["GET", "HEAD"])
+@app.get("/")
 def main_page(request: Request, db: Session = Depends(get_db)):
     funerals = db.query(models.Funeral).order_by(models.Funeral.created_at.desc()).all()
     avg_r = db.query(func.avg(models.Funeral.profit_rate)).scalar() or 0.0
