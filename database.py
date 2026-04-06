@@ -9,14 +9,20 @@ SQLALCHEMY_DATABASE_URL = os.environ.get(
     "sqlite:///./stocks.db"
 )
 
-# 2. SQLite일 때만 필요한 설정 추가
+# 2. DB 종류에 따라 연결 옵션 설정
 connect_args = {}
 if SQLALCHEMY_DATABASE_URL.startswith("sqlite"):
+    # SQLite용 설정
     connect_args = {"check_same_thread": False}
+else:
+    # PostgreSQL(Render)용 설정
+    connect_args = {"sslmode": "require"}
 
-# 3. 엔진 생성
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args=connect_args)
-
+# 3. 엔진 생성 (수정된 connect_args 사용)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args=connect_args  # 골라 쓰게 합니다!
+)
 # 4. 세션 및 베이스 설정
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
