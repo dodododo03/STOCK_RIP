@@ -23,7 +23,7 @@ class FuneralResponse(FuneralCreate):
 
     model_config = {"from_attributes": True}  # v2 스타일로 통일!
 
-# ── 응답 (서버 → 클라이언트) ──────────────────────────────────────
+# ── 응답 (서버 -> 클라이언트) ──────────────────────────────────────
 class CommentResponse(BaseModel):
     id:         int
     nickname:   str

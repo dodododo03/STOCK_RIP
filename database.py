@@ -21,7 +21,7 @@ else:
 # 3. 엔진 생성 (수정된 connect_args 사용)
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
-    connect_args=connect_args  # 골라 쓰게 합니다!
+    connect_args={"sslmode": "require"} # 👈 이미 하셨다면 로그를 다시 봐야 합니다!
 )
 # 4. 세션 및 베이스 설정
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
